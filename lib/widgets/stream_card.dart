@@ -20,11 +20,15 @@ class StreamCard extends StatelessWidget {
         child: Center(
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
+                primary: ColorConstants.primaryColor,
                 fixedSize:
                     Size(MediaQuery.of(context).size.width * 0.37, 47.0)),
             label: Text(
-              streamModel.streamName.toString(),
-              style: const TextStyle(color: Colors.white),
+              streamModel.streamName.toString().toUpperCase(),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 14.0,
+              ),
             ),
             icon: const Icon(Icons.play_arrow),
             onPressed: () {},
