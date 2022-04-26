@@ -3,4 +3,5 @@ class ApiConstants {
   static String requestFormat = '/format/json';
   static String streamsList = '/list';
   static String songsListByStreamId = '/songs/id/';
+  static String codeveryWork = 'http://radio.codevery.work';
 }
