@@ -3,6 +3,7 @@ import 'package:radio/constants.dart';
 import 'package:radio/models/stream.model.dart';
 
 import '../api_service.dart';
+import '../widgets/stream_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -42,13 +43,13 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.w700,
               )),
           centerTitle: true,
-          backgroundColor: const Color(0xFF0C0D31),
+          backgroundColor: ColorConstants.primaryColor,
           toolbarHeight: MediaQuery.of(context).size.height * 0.15),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 27.0, horizontal: 15.0),
         child: _streamModel.isEmpty
-            ? const Center(
-                child: CircularProgressIndicator(color: Color(0xFF0C0D31)))
+            ? Center(
+                child: CircularProgressIndicator(color: ColorConstants.primaryColor))
             : GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -56,33 +57,8 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 20.0),
                 itemCount: _streamModel.length,
                 itemBuilder: (context, index) {
-                  var imgUri = ApiConstants.codeveryWork +
-                      '/' +
-                      _streamModel[index].streamBackground;
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    color: const Color(0xFF0C0D31),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(imgUri), fit: BoxFit.fill),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Center(
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                              fixedSize: Size(
-                                  MediaQuery.of(context).size.width * 0.37,
-                                  47.0)),
-                          label: Text(
-                            _streamModel[index].streamName.toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          icon: const Icon(Icons.play_arrow),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
+                  return StreamCard(
+                    streamModel: _streamModel[index],
                   );
                 }),
       ),
