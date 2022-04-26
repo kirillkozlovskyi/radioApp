@@ -25,10 +25,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/appBarBg.png'),
+              fit: BoxFit.fill
+            )
+          ),
+        ),
+          title: Text(appTitle, style: const TextStyle(
+              color: Colors.white,
+              fontSize: 26.0,
+              fontWeight: FontWeight.w700,
+          )),
+          centerTitle: true,
+          backgroundColor: const Color(0xFF0C0D31),
 
-      appBar: AppBar(title: Text(appTitle, style: const TextStyle(color: Colors.white, fontSize: 20.0))),
+          toolbarHeight: MediaQuery.of(context).size.height * 0.15
+
+
+      ),
       body: _streamModel.isEmpty
-        ? const Center(child:  CircularProgressIndicator())
+        ? const Center(child:  CircularProgressIndicator(color: Color(0xFF0C0D31)))
         : Center(
             child: ListView.builder(
               itemCount: _streamModel.length,
