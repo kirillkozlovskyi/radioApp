@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
 import '../widgets/app_load.dart';
 import 'home_page.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -22,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ))
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> {
             Padding(
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.2),
-              // child: Image.asset('assets/images/musicRecord.png', height: 250),
               child: const AppLoadProgressbar(),
             ),
             const SizedBox(height: 100.0),
@@ -49,3 +49,4 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
