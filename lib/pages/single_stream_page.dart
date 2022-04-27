@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/stream.model.dart';
+import '../widgets/app_bar.dart';
 
 class SingleStream extends StatefulWidget {
   const SingleStream({Key? key, required this.streamModel}) : super(key: key);
@@ -13,9 +14,7 @@ class _SingleStreamState extends State<SingleStream> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.streamModel.streamName),
-      ),
+      appBar: StyledAppBar(title: widget.streamModel.streamName),
       body: Container(
         child: Text('Stream page container'),
       ),
