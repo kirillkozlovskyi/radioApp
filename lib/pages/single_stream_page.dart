@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import '../models/stream.model.dart';
 
 class SingleStream extends StatefulWidget {
-  const SingleStream({Key? key}) : super(key: key);
-
+  const SingleStream({Key? key, required this.streamModel}) : super(key: key);
+  final StreamModel streamModel;
   @override
   State<SingleStream> createState() => _SingleStreamState();
 }
@@ -10,6 +12,13 @@ class SingleStream extends StatefulWidget {
 class _SingleStreamState extends State<SingleStream> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.streamModel.streamName),
+      ),
+      body: Container(
+        child: Text('Stream page container'),
+      ),
+    );
   }
 }

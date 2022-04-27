@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:radio/constants.dart';
-import 'package:radio/models/stream.model.dart';
 
 import '../api_service.dart';
+import '../constants.dart';
+import '../models/stream.model.dart';
 import '../widgets/stream_card.dart';
+import 'single_stream_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -60,15 +61,17 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return StreamCard(
                     streamModel: _streamModel[index],
-                    streamPress: navigateToStream,
+                    streamPress: (StreamModel streamModel) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SingleStream(streamModel: streamModel)));
+                    },
                   );
                 },
               ),
       ),
     );
-  }
-
-  void navigateToStream(StreamModel streamModel) {
-    print('_HomePageState ->' + streamModel.streamName);
   }
 }
