@@ -4,8 +4,10 @@ import 'package:radio/models/stream.model.dart';
 import '../constants.dart';
 
 class StreamCard extends StatelessWidget {
-  const StreamCard({Key? key, required this.streamModel}) : super(key: key);
+  const StreamCard({Key? key, required this.streamModel, this.streamPress})
+      : super(key: key);
   final StreamModel streamModel;
+  final streamPress;
   @override
   Widget build(BuildContext context) {
     var imgUri = ApiConstants.codeveryWork + '/' + streamModel.streamBackground;
@@ -31,7 +33,7 @@ class StreamCard extends StatelessWidget {
               ),
             ),
             icon: const Icon(Icons.play_arrow),
-            onPressed: () {},
+            onPressed: () => streamPress(streamModel),
           ),
         ),
       ),

@@ -49,7 +49,8 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(vertical: 27.0, horizontal: 15.0),
         child: _streamModel.isEmpty
             ? Center(
-                child: CircularProgressIndicator(color: ColorConstants.primaryColor))
+                child: CircularProgressIndicator(
+                    color: ColorConstants.primaryColor))
             : GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -59,9 +60,15 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return StreamCard(
                     streamModel: _streamModel[index],
+                    streamPress: navigateToStream,
                   );
-                }),
+                },
+              ),
       ),
     );
+  }
+
+  void navigateToStream(StreamModel streamModel) {
+    print('_HomePageState ->' + streamModel.streamName);
   }
 }
