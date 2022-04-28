@@ -17,6 +17,7 @@ class SingleStream extends StatefulWidget {
 }
 
 class _SingleStreamState extends State<SingleStream> {
+  @override
   void initState() {
     super.initState();
     _getSongs();
@@ -42,7 +43,7 @@ class _SingleStreamState extends State<SingleStream> {
               : ListView.builder(
                   itemCount: _songModel.length,
                   itemBuilder: (context, index) =>
-                    SongItem(songItem: _songModel[index]),
+                    SongItem(songItem: _songModel[index], isPaused: true),
                 )),
     );
   }
