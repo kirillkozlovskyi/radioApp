@@ -7,6 +7,7 @@ import '../constants.dart';
 import '../models/song.model.dart';
 import '../models/stream.model.dart';
 import '../widgets/app_bar.dart';
+import '../widgets/songListItem.dart';
 
 class SingleStream extends StatefulWidget {
   const SingleStream({Key? key, required this.streamModel}) : super(key: key);
@@ -41,7 +42,7 @@ class _SingleStreamState extends State<SingleStream> {
               : ListView.builder(
                   itemCount: _songModel.length,
                   itemBuilder: (context, index) =>
-                      Text(_songModel[index].title),
+                    SongItem(songItem: _songModel[index]),
                 )),
     );
   }
