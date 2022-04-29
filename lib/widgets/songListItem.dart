@@ -4,11 +4,10 @@ import 'package:radio/constants.dart';
 import 'package:radio/models/song.model.dart';
 
 class SongItem extends StatefulWidget {
-  SongItem({Key? key, required this.songItem, required this.isPaused, this.songPress})
+  SongItem({Key? key, required this.songItem, this.songPress})
       : super(key: key);
   final SongModel songItem;
   final songPress;
-  bool isPaused;
   @override
   State<SongItem> createState() => _SongItemState();
 }
@@ -74,10 +73,10 @@ class _SongItemState extends State<SongItem> {
                 ),
               ),
               OutlinedButton(
-                child: Icon(widget.isPaused ? Icons.play_arrow : Icons.pause),
+                child: Icon(widget.songItem.isPlay ? Icons.pause : Icons.play_arrow),
                 onPressed: () {
                   setState(() {
-                    widget.isPaused = !widget.isPaused;
+                    widget.songItem.isPlay = !widget.songItem.isPlay;
                   });
                 },
                 style: ElevatedButton.styleFrom(

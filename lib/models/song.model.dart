@@ -12,6 +12,7 @@ class SongModel {
   String year;
   String streamId;
   String imageUrl;
+  bool isPlay;
 
   SongModel({
     required this.id,
@@ -23,6 +24,7 @@ class SongModel {
     required this.year,
     required this.streamId,
     required this.imageUrl,
+    this.isPlay = false,
   });
 
   factory SongModel.fromJson(Map<String, dynamic> json) {
@@ -35,7 +37,8 @@ class SongModel {
         genre: json['genre'],
         year: json['year'],
         streamId: json['stream_id'],
-        imageUrl: json['image_url']
+        imageUrl: json['image_url'],
+        isPlay: false,
     );
   }
 
