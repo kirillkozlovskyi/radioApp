@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:radio/constants.dart';
-import 'package:radio/models/stream.model.dart';
 
 import '../api_service.dart';
+import '../constants.dart';
+import '../models/stream.model.dart';
+import '../widgets/app_bar.dart';
 import '../widgets/stream_card.dart';
+import 'single_stream_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,22 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/appBarBg.png'),
-                    fit: BoxFit.fill)),
-          ),
-          title: Text(appTitle,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 26.0,
-                fontWeight: FontWeight.w700,
-              )),
-          centerTitle: true,
-          backgroundColor: ColorConstants.primaryColor,
-          toolbarHeight: MediaQuery.of(context).size.height * 0.15),
+      appBar: StyledAppBar(title: appTitle),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 27.0, horizontal: 15.0),
         child: _streamModel.isEmpty
@@ -60,15 +47,17 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return StreamCard(
                     streamModel: _streamModel[index],
-                    streamPress: navigateToStream,
+                    streamPress: (StreamModel streamModel) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SingleStream(streamModel: streamModel)));
+                    },
                   );
                 },
               ),
       ),
     );
-  }
-
-  void navigateToStream(StreamModel streamModel) {
-    print('_HomePageState ->' + streamModel.streamName);
   }
 }
