@@ -10,8 +10,10 @@ import '../widgets/app_bar.dart';
 import '../widgets/songListItem.dart';
 
 class SingleStream extends StatefulWidget {
-  const SingleStream({Key? key, required this.streamModel}) : super(key: key);
+  const SingleStream({Key? key, required this.streamModel, this.onShowSongWindow, this.selectedSong}) : super(key: key);
   final StreamModel streamModel;
+  final onShowSongWindow;
+  final selectedSong;
   @override
   State<SingleStream> createState() => _SingleStreamState();
 }
@@ -26,7 +28,7 @@ class _SingleStreamState extends State<SingleStream> {
   List<SongModel> _songModel = [];
   void _getSongs() async {
     _songModel =
-        (await ApiService().getSongsByStreamId(widget.streamModel.streamId))!;
+    (await ApiService().getSongsByStreamId(widget.streamModel.streamId))!;
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
@@ -38,13 +40,35 @@ class _SingleStreamState extends State<SingleStream> {
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20.0),
           child: _songModel.isEmpty
               ? Center(
-                  child: CircularProgressIndicator(
-                      color: ColorConstants.primaryColor))
+              child: CircularProgressIndicator(
+                  color: ColorConstants.primaryColor))
               : ListView.builder(
-                  itemCount: _songModel.length,
-                  itemBuilder: (context, index) =>
-                    SongItem(songItem: _songModel[index], ),
-                )),
+            itemCount: _songModel.length,
+            itemBuilder: (context, index) =>
+                SongItem(
+                  songItem: _songModel[index],
+                  songPress: (SongModel songItem) { resetPlayBnt(index); },
+                  onSongNamePress: (bool data) {
+                    setState(() {
+                      widget.onShowSongWindow(data);
+                    });
+
+                  },
+                ),
+          )),
     );
   }
+  resetPlayBnt(index) {
+    setState(() {
+      for(var i in _songModel) {
+        if (i.id == _songModel[index].id) {
+          _songModel[index].isPlay = !_songModel[index].isPlay;
+          widget.selectedSong(_songModel[index]);
+        } else {
+          i.isPlay = false;
+        }
+      }
+    });
+  }
+
 }

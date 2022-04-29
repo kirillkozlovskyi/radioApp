@@ -4,10 +4,11 @@ import 'package:radio/constants.dart';
 import 'package:radio/models/song.model.dart';
 
 class SongItem extends StatefulWidget {
-  SongItem({Key? key, required this.songItem, this.songPress})
+  const SongItem({Key? key, required this.songItem, this.songPress, this.onSongNamePress})
       : super(key: key);
   final SongModel songItem;
   final songPress;
+  final onSongNamePress;
   @override
   State<SongItem> createState() => _SongItemState();
 }
@@ -29,7 +30,9 @@ class _SongItemState extends State<SongItem> {
           child: Row(
             children: [
               GestureDetector(
-                onTap: () { },
+                onTap: () { setState(() {
+                  widget.onSongNamePress(true);
+                }); },
                 child: Row(
                   children: [
                     Container(
@@ -39,10 +42,10 @@ class _SongItemState extends State<SongItem> {
                           borderRadius: BorderRadius.circular(5.0),
                           image: widget.songItem.imageUrl.contains('.svg')
                               ? const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage('assets/images/Purplecom.jpg'))
+                              fit: BoxFit.cover,
+                              image: AssetImage('assets/images/Purplecom.jpg'))
                               : DecorationImage(
-                                  fit: BoxFit.cover, image: NetworkImage(imgUri))
+                              fit: BoxFit.cover, image: NetworkImage(imgUri))
                       ),
                     ),
                     Container(
@@ -76,7 +79,7 @@ class _SongItemState extends State<SongItem> {
                 child: Icon(widget.songItem.isPlay ? Icons.pause : Icons.play_arrow),
                 onPressed: () {
                   setState(() {
-                    widget.songItem.isPlay = !widget.songItem.isPlay;
+                    widget.songPress(widget.songItem);
                   });
                 },
                 style: ElevatedButton.styleFrom(
