@@ -7,6 +7,7 @@ import '../constants.dart';
 import '../models/song.model.dart';
 import '../models/stream.model.dart';
 import '../widgets/app_bar.dart';
+import '../widgets/modal_bottom_sheet.dart';
 import '../widgets/songListItem.dart';
 
 class SingleStream extends StatefulWidget {
@@ -49,6 +50,11 @@ class _SingleStreamState extends State<SingleStream> {
                   songItem: _songModel[index],
                   songPress: (SongModel songItem) { resetPlayBnt(index); },
                   onSongNamePress: (bool data) {
+                    // TODO open modal bottom Sheet
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) => const BuildBottomSheet());
+                    print('SongItem');
                     setState(() {
                       widget.onShowSongWindow(data);
                     });
